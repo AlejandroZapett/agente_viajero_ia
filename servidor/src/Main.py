@@ -2,10 +2,11 @@ from Nodo import Nodo
 from Estructuras import Cola
 import sys
 
-class Main:
-	def __init__(self, ciudad_inicial, ciudad_final):
+class Main: 
+
+	def __init__(self, ciudad_inicial, ciudades):
 		self.ciudades = self.conseguir_ciudades()
-		ruta = self.conseguir_ruta_iterativa(ciudad_inicial, ciudad_final)
+		ruta = []
 		self.imprimir_ruta(ruta)
 
 	def conseguir_ruta_iterativa(self, ciudad_inicial, ciudad_final):
@@ -68,6 +69,7 @@ class Main:
 if __name__ == '__main__':
 	args = sys.argv[1].split(" ")
 	#"Neamt Oradea"
+	ciudad_inicial = "Urziceni"
 	main = Main(args[0], args[1])
 	#main.pruebas()
 
