@@ -1,4 +1,4 @@
-# Viajero
+# Agente Viajero
 
 Este programa se realizó para la clase de Inteligencia Artificial.
 
