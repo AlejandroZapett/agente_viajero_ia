@@ -1,15 +1,45 @@
 from Nodo import Nodo
 from Estructuras import Cola
+from Estructuras import Pila
 import sys
 
 class Main: 
 
-	def __init__(self, ciudad_inicial, ciudades):
+	def __init__(self, ciudad_inicial, ciudades_por_visitar):
 		self.ciudades = self.conseguir_ciudades()
-		ruta = []
+		self.ciudades_por_visitar = ciudades_por_visitar.split(" ")
+
+		#ruta = self.conseguir_ruta_profundidad(ciudad_inicial)
+		ruta = self.conseguir_ruta_amplitud(ciudad_inicial)
 		self.imprimir_ruta(ruta)
 
-	def conseguir_ruta_iterativa(self, ciudad_inicial, ciudad_final):
+	def conseguir_ruta_profundidad(self, ciudad_inicial):
+		#condiciones inciales
+
+		#cambiar de string a nodos
+		ciudad_actual = self.cadena_nodo(ciudad_inicial)
+		visitados = []
+		pila = Pila()
+
+		#Busqueda por amplitud (BFS)
+		#modificar es solución
+		while (self.es_solucion(ciudad_actual) == False):
+			visitados = visitados + self.marcar_visita(ciudad_actual)
+			pila.filtrar(visitados)
+			hijos = ciudad_actual.conseguir_hijos()
+			for hijo in hijos:
+				if hijo not in visitados:
+					hijo = self.cadena_nodo(hijo)
+					hijo.establecer_padre(ciudad_actual)
+					hijo.establecer_ruta_nodo(ciudad_actual.conseguir_ruta_nodo(), ciudad_actual.conseguir_nombre_ciudad())
+					pila.push(hijo)
+
+			#filtrar cola
+			ciudad_actual = pila.pop()
+
+		return ciudad_actual.conseguir_ruta_nodo()
+
+	def conseguir_ruta_amplitud(self, ciudad_inicial):
 		#condiciones inciales
 
 		#cambiar de string a nodos
@@ -18,8 +48,13 @@ class Main:
 		cola = Cola()
 
 		#Busqueda por amplitud (BFS)
-		while (self.es_solucion(ciudad_actual, ciudad_final) == False):
-			visitados.append(ciudad_actual.conseguir_nombre_ciudad())
+		#modificar es solución
+		while (len(self.ciudades_por_visitar) != 0):
+			if ciudad_actual.conseguir_nombre_ciudad() in self.ciudades_por_visitar:
+				self.ciudades_por_visitar = [x for x in self.ciudades_por_visitar if x != ciudad_actual.conseguir_nombre_ciudad()]
+				cola = Cola()	
+			visitados = visitados + self.marcar_visita(ciudad_actual)
+			cola.filtrar(visitados)
 			hijos = ciudad_actual.conseguir_hijos()
 			for hijo in hijos:
 				if hijo not in visitados:
@@ -27,20 +62,34 @@ class Main:
 					hijo.establecer_ruta_nodo(ciudad_actual.conseguir_ruta_nodo(), ciudad_actual.conseguir_nombre_ciudad())
 					cola.push(hijo)
 
+			#filtrar cola
 			ciudad_actual = cola.pop()
 
-		ciudad_actual.establecer_ruta_nodo(ciudad_actual.conseguir_ruta_nodo(), ciudad_actual.conseguir_nombre_ciudad())
 		return ciudad_actual.conseguir_ruta_nodo()
 
 
-	def es_solucion(self, ciudad_actual, ciudad_final):
-		if ciudad_actual.conseguir_nombre_ciudad() == ciudad_final:
+	def es_solucion(self, ciudad_actual):
+		contador_ciudades = 0
+		for ciudad in self.ciudades_por_visitar:
+			if ciudad in ciudad_actual.conseguir_ruta_nodo():
+				contador_ciudades = contador_ciudades + 1
+
+
+		if contador_ciudades >= len(self.ciudades_por_visitar):
 			return True
 		else:
 			return False
 
+		
+
+	def marcar_visita(self, ciudad):
+		if ciudad.establecer_visita() == 1:
+			return []
+		else:
+			return [ciudad.conseguir_nombre_ciudad()]
+
 	def conseguir_ciudades(self): #regresa una lista de nodo, cada nodo es una ciudad
-		ciudades = open('estados.txt', 'r').read().split("\n")#leemos y convertimos a lista
+		ciudades = open('servidor/src/estados.txt', 'r').read().split("\n")#leemos y convertimos a lista
 		ciudades = [Nodo(ciudad.split(":")[0], ciudad.split(":")[1].split(",")) for ciudad in ciudades]
 		return ciudades
 
@@ -59,17 +108,16 @@ class Main:
 
 	def pruebas(self):
 		print("=== Pruebas Main ===")
-		ciudades = self.conseguir_ciudades()
-
-		for ciudad in ciudades:
-			print(ciudad.conseguir_nombre_ciudad()+" : ")
-			print(ciudad.conseguir_hijos())
+		
 
 
 if __name__ == '__main__':
-	args = sys.argv[1].split(" ")
+	args = sys.argv[1].split(":")
 	#"Neamt Oradea"
-	ciudad_inicial = "Urziceni"
+	#"Oradea:Bucarest Neamt"
+	ciudad_inicial = args[0]
+	ciudades_por_visitar = args[1].split(" ")
+
 	main = Main(args[0], args[1])
 	#main.pruebas()
 

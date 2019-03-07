@@ -20,7 +20,7 @@ io.on('connection', function(socket){
 
 	socket.on('request', function(data){
 		console.log(data);
-		//pythonScript(data);
+		pythonScript(data);
 	});
 
 });

@@ -1,0 +1,25 @@
+{
+  "name": "viajero",
+  "version": "1.0.0",
+  "description": "Este programa se realizó para la clase de Inteligencia Artificial.",
+  "main": "app.js",
+  "scripts": {
+    "test": "node servidor/app",
+    "start": "node servidor/app"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AlejandroZapett/agente_viajero_ia.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AlejandroZapett/agente_viajero_ia/issues"
+  },
+  "homepage": "https://github.com/AlejandroZapett/agente_viajero_ia#readme",
+  "dependencies": {
+    "express": "^4.16.4",
+    "python-shell": "^1.0.7",
+    "socket.io": "^2.2.0"
+  }
+}

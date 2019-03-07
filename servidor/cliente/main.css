@@ -11,4 +11,54 @@ body {
 	flex-flow: column;
 	background-color: #595959;
 	color: white;
+
+	position: sticky;
+	top: 0;
+}
+
+.map-area {
+	width: 70%;
+	max-height: 80vh;
+	position: absolute;
+	right: 0;
+}
+
+.map-area img {
+	max-width: 800px;
+	max-height: 80vh;
+}
+
+.input-area {
+	width: 25%;
+	position: absolute;
+	left: 0;
+	padding: 3%;
+}
+
+p {
+	font-size: 25px;
+}
+input {
+	font-size: 25px;
+}
+
+button {
+	padding: 10px 20px;
+	background-color: #33cccc;
+	border-radius: 10px;
+	font-size: 25px;
+}
+
+.log-area {
+	background-color: white;
+	min-height: 100px;
+	width: 100%;
+	border-top: solid 1px black;
+
+	position: absolute;
+	top: 80vh;
+	padding: 20px;
+
+	display: flex;
+	justify-content: center;
 }

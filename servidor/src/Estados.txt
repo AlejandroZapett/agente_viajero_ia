@@ -1,8 +1,8 @@
-Oradea:Zerind,Sibiu
+Oradea:Sibiu,Zerind
 Zerind:Oradea,Arad
 Arad:Zerind,Sibiu,Timisoara
 Timisoara:Arad,Lugoj
-Lugoj:Mehadia,Timisoara
+Lugoj:Timisoara,Mehadia
 Mehadia:Lugoj,Dobreta
 Dobreta:Mehadia,Craiova
 Craiova:Dobreta,Rimnicu Vilcea,Pitesti

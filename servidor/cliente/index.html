@@ -3,6 +3,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Viajero</title>
+	<link rel="stylesheet" href="main.css">
 </head>
 <body>
 	<!-- Header -->
@@ -17,14 +18,16 @@
 
 	<!-- Input area -->
 	<div class="input-area">
-		<input type="text" id="ei">
-		<input type="text" id="ef">
+		<p>Ciudad de inicio: </p>
+		<p><input type="text" id="ei"></p>
+		<p>Ciudades por visiar: </p>
+		<p><input type="text" id="ef"></p>
 		<button id="submit-button">Submit</button>
 	</div>
 
 	<!-- Reponse area -->
 	<div id="response-area" class="log-area">
-		
+	
 	</div>
 
 	<script src="/socket.io/socket.io.js" charset="utf-8"></script>
