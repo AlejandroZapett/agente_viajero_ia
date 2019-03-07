@@ -18,9 +18,6 @@ El procedimiento de instalación y ejecución es el siguiente:
 En la carpeta img se muestran imágenes del funcionamiento de
 la interfaz gráfica.
 
-El programa implemente dos formas de realizar una búsqueda
-por profundiad, una recursiva y otra funcional.
-
 Para ejecutar el progama desde la terminal:
 
- 1. ejecutar: python Main.py "ciudad_inicial ciudad final"
+ 1. ejecutar: python servidor/src/Main.py "ciudad_inicial:ciudad1 ciudad2"
