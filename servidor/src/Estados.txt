@@ -1,20 +1,20 @@
-Oradea:Sibiu,Zerind
-Zerind:Oradea,Arad
-Arad:Zerind,Sibiu,Timisoara
-Timisoara:Arad,Lugoj
-Lugoj:Timisoara,Mehadia
-Mehadia:Lugoj,Dobreta
-Dobreta:Mehadia,Craiova
-Craiova:Dobreta,Rimnicu Vilcea,Pitesti
-Rimnicu Vilcea:Craiova,Pitesti,Sibiu
-Sibiu:Rimnicu Vilcea,Fagaras,Arad,Oradea
-Fagaras:Sibiu,Bucarest
-Pitesti:Craiova,Rimnicu Vilcea,Bucarest
-Bucarest:Fagaras,Pitesti,Giurgiu,Urziceni
-Giurgiu:Bucarest
-Urziceni:Bucarest,Vaslui,Hirsova
-Hirsova:Urziceni,Eforie
-Eforie:Hirsova
-Vaslui:Urziceni,Iasi
-Iasi:Vaslui,Neamt
-Neamt:Iasi
+Oradea:151-Sibiu,71-Zerind
+Zerind:71-Oradea,75-Arad
+Arad:75-Zerind,140-Sibiu,118-Timisoara
+Timisoara:118-Arad,111-Lugoj
+Lugoj:111-Timisoara,70-Mehadia
+Mehadia:70-Lugoj,75-Dobreta
+Dobreta:75-Mehadia,120-Craiova
+Craiova:120-Dobreta,146-Rimnicu Vilcea,138-Pitesti
+Rimnicu Vilcea:146-Craiova,97-Pitesti,80-Sibiu
+Sibiu:80-Rimnicu Vilcea,99-Fagaras,140-Arad,151-Oradea
+Fagaras:99-Sibiu,211-Bucarest
+Pitesti:138-Craiova,97-Rimnicu Vilcea,101-Bucarest
+Bucarest:211-Fagaras,101-Pitesti,90-Giurgiu,85-Urziceni
+Giurgiu:90-Bucarest
+Urziceni:85-Bucarest,142-Vaslui,98-Hirsova
+Hirsova:98-Urziceni,86-Eforie
+Eforie:86-Hirsova
+Vaslui:142-Urziceni,92-Iasi
+Iasi:92-Vaslui,87-Neamt
+Neamt:87-Iasi
