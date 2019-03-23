@@ -9,43 +9,18 @@ class Main:
 		self.ciudades = self.conseguir_ciudades()
 		self.ciudades_por_visitar = ciudades_por_visitar.split(" ")
 
-		#ruta = self.conseguir_ruta_profundidad(ciudad_inicial)
 		ruta = self.conseguir_ruta_amplitud(ciudad_inicial)
 		self.imprimir_ruta(ruta)
 
-	def conseguir_ruta_profundidad(self, ciudad_inicial):
-		#condiciones inciales
-
-		#cambiar de string a nodos
-		ciudad_actual = self.cadena_nodo(ciudad_inicial)
-		visitados = []
-		pila = Pila()
-
-		#Busqueda por amplitud (BFS)
-		#modificar es solución
-		while (self.es_solucion(ciudad_actual) == False):
-			visitados = visitados + self.marcar_visita(ciudad_actual)
-			pila.filtrar(visitados)
-			hijos = ciudad_actual.conseguir_hijos()
-			for hijo in hijos:
-				if hijo not in visitados:
-					hijo = self.cadena_nodo(hijo)
-					hijo.establecer_padre(ciudad_actual)
-					hijo.establecer_ruta_nodo(ciudad_actual.conseguir_ruta_nodo(), ciudad_actual.conseguir_nombre_ciudad())
-					pila.push(hijo)
-
-			#filtrar cola
-			ciudad_actual = pila.pop()
-
-		return ciudad_actual.conseguir_ruta_nodo()
-
 	def conseguir_ruta_amplitud(self, ciudad_inicial):
 		#condiciones inciales
+		lista_soluciones = []
+		visitados = []
+		cola = Cola()
+		costo_de_referencia = 1000000
 
 		#cambiar de string a nodos
 		ciudad_actual = self.cadena_nodo(ciudad_inicial)
-		visitados = []
-		cola = Cola()
 
 		#Busqueda por amplitud (BFS)
 		#modificar es solución
@@ -69,18 +44,12 @@ class Main:
 
 
 	def es_solucion(self, ciudad_actual):
-		contador_ciudades = 0
-		for ciudad in self.ciudades_por_visitar:
-			if ciudad in ciudad_actual.conseguir_ruta_nodo():
-				contador_ciudades = contador_ciudades + 1
+		#Implemntar método
+		pass
 
-
-		if contador_ciudades >= len(self.ciudades_por_visitar):
-			return True
-		else:
-			return False
-
-		
+	def conseguir_mejor_solucion(self, lista_soluciones):
+		#Implementar método
+		pass
 
 	def marcar_visita(self, ciudad):
 		if ciudad.establecer_visita() == 1:
@@ -90,8 +59,9 @@ class Main:
 
 	def conseguir_ciudades(self): #regresa una lista de nodo, cada nodo es una ciudad
 		ciudades = open('servidor/src/estados.txt', 'r').read().split("\n")#leemos y convertimos a lista
-		ciudades = [Nodo(ciudad.split(":")[0], ciudad.split(":")[1].split(",")) for ciudad in ciudades]
-		return ciudades
+		#Implementar método
+		#ciudades = [Nodo(ciudad.split(":")[0], ciudad.split(":")[1].split(",")) for ciudad in ciudades]
+		#return ciudades
 
 	def cadena_nodo(self, cadena):
 		for ciudad in self.ciudades:

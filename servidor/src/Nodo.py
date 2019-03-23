@@ -4,7 +4,7 @@ class Nodo:
 		self.lista_hijos = lista_hijos
 		self.ruta_al_nodo = []
 		self.visitas = [0 for x in range(len(lista_hijos)-1)]
-		self.sol = False
+		self.costo_acumulado = 0
 
 	def conseguir_nombre_ciudad(self):
 		return self.nombre_ciudad
@@ -34,8 +34,8 @@ class Nodo:
 
 		return idx
 
-	def establecer_como_solucion(self):
-		self.sol = True
-		
-	def soy_solucion(self):
-		return self.sol
+	def conseguir_costo(self):
+		return self.costo_acumulado
+
+	def establecer_costo(self, costo):
+		self.costo_acumulado = self.costo_acumulado + costo
