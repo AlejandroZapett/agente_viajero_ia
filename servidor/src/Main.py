@@ -48,8 +48,10 @@ class Main:
 		pass
 
 	def conseguir_mejor_solucion(self, lista_soluciones):
-		#Implementar método
-		pass
+		lista_aux = []
+		lista_aux = sorted(lista_soluciones, key = lambda x: x.costo_acumulado)
+		nodo_solucion = lista_aux[0]	
+		return nodo_solucion
 
 	def marcar_visita(self, ciudad):
 		if ciudad.establecer_visita() == 1:
