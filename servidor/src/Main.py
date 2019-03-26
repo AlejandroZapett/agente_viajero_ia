@@ -43,9 +43,20 @@ class Main:
 		return ciudad_actual.conseguir_ruta_nodo()
 
 
-	def es_solucion(self, ciudad_actual):
-		#Implemntar método
-		pass
+	def es_solucion(self, ciudad_actual):#ciudad_actual = nodo
+		#Implementando el metodo
+		ciudades_visitadas = ciudad_actual.conseguir_ruta_nodo();#ciudades que ya fueron visitadas
+		bandera = true #bandera que nos indica que si se encontro una ciudad de las que se desean visitar, en la lista de visitados
+		#por_visitar = ciudad_actual.ciudades_por_visitar;
+		for i in ciudades_por_visitar:#ciudades que se desean que se visiten
+			bandera = true# inicializamos la bandera
+			for j in ciudades_visitadas:
+				if j == i:#verificamos si la ciudad que se desea visitar, ya fue visitada
+					bandera = false#cambiamos la bandera por false, indicando que una de las ciudades por visitar, ya fue visitada
+					break          #entonces rompemos el ciclo, y nos pasamos a la siguiente ciudad que se desea visitar
+			if bandera:#verificamos la bandera
+				return false #si la bandera no cambio, entonces significa que al menos una de las ciudades que se desean visitar, no ha sido visitada
+		return true#devolvemos true cuando las ciudades que se desean visitar, ya fueron visitadas
 
 	def conseguir_mejor_solucion(self, lista_soluciones):
 		lista_aux = []
