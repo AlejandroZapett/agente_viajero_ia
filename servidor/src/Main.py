@@ -71,10 +71,21 @@ class Main:
 			return [ciudad.conseguir_nombre_ciudad()]
 
 	def conseguir_ciudades(self): #regresa una lista de nodo, cada nodo es una ciudad
-		ciudades = open('servidor/src/estados.txt', 'r').read().split("\n")#leemos y convertimos a lista
-		#Implementar método
-		#ciudades = [Nodo(ciudad.split(":")[0], ciudad.split(":")[1].split(",")) for ciudad in ciudades]
-		#return ciudades
+		ciudades= open('servidor/src/estados.txt', 'r').read().split("\n")
+		lista_ciudades=[]
+		for ciudad in ciudades:
+			nombre_ciudad= ciudad.split(":")[0]
+			lista_hijos=ciudad.split(":")[1].split(",")
+			lista_dos_hijos =[]
+			for hijo in lista_hijos:
+				lista_aux=hijo.split("-")
+
+				hijo = [lista_aux[1],int(lista_aux[0])]
+				lista_dos_hijos.append(hijo)
+
+
+			lista_ciudades.append(Nodo(nombre_ciudad,lista_dos_hijos))
+		return lista_ciudades
 
 	def cadena_nodo(self, cadena):
 		for ciudad in self.ciudades:
