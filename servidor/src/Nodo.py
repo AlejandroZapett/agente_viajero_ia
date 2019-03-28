@@ -6,6 +6,8 @@ class Nodo:
 		self.visitas = [0 for x in range(len(lista_hijos)-1)]
 		self.costo_acumulado = 0
 
+	### Getters ###
+
 	def conseguir_nombre_ciudad(self):
 		return self.nombre_ciudad
 
@@ -14,6 +16,19 @@ class Nodo:
 
 	def conseguir_ruta_nodo(self):
 		return self.ruta_al_nodo
+
+	def conseguir_visitas(self):
+		idx = 0
+		for x in self.visitas:
+			if x == 0:
+				idx = idx + 1
+
+		return idx
+
+	### Setters ###
+
+	def conseguir_costo(self):
+		return self.costo_acumulado
 
 	def establecer_ruta_nodo(self, ruta, ciudad):
 		self.ruta_al_nodo = ruta + [ciudad]
@@ -25,17 +40,6 @@ class Nodo:
 				return 1
 
 		return -1
-
-	def conseguir_visitas(self):
-		idx = 0
-		for x in self.visitas:
-			if x == 0:
-				idx = idx + 1
-
-		return idx
-
-	def conseguir_costo(self):
-		return self.costo_acumulado
 
 	def establecer_costo(self, costo):
 		self.costo_acumulado = self.costo_acumulado + costo
