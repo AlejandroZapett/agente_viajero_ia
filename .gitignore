@@ -49,3 +49,4 @@ package-lock.json
 Thumbs.db
 /__pycache__
 /servidor/src/__pycache__
+/servidor/src/*.pyc
