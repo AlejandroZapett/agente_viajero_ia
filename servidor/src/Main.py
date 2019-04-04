@@ -200,11 +200,25 @@ def agente_viajero(argumentos):
 			lista_aux = sorted(lista_soluciones, key = lambda x: x.costo_acumulado)
 			nodo_solucion = lista_aux[0]	
 			return nodo_solucion
-
+		####Modifique esta funcion para que devuelva la lista ordenada con respecto a su distancia
 		def ordenar_lista(self, lista):
 			lista_aux = []
-			lista_aux = sorted(lista, key = lambda x: x.costo_acumulado)
+			lista_aux = sorted(lista, key = lambda x: x.conseguir_distancia())#key = lambda x: x.costo_acumulado
 			return list(lista_aux)
+			
+		####Funcion heuristica
+		def heuristica_prueba(self, ciudad_inicial)#ciudad final = Bucarest
+									#Declaramos la lista de la ciudades con su respectiva distancia en linea recta hacia Bucarest
+			lista_hacia_Bucarest = [['Arand',366],['Craviova',160],['Dobreta',242],['Eforie',161],['Fagaras',176],
+									['Giurgiu',77],['Hirsova',151],['Iasi',256],['Lugoj',244],['Mehadia',241],
+									['Neamt',234],['Oradea',380],['Pitesti',100],['Rimnicu Vilcea',193],['Sibiu',253],
+									['Timisoara',329],['Urziceni',80],['Vaslui',199],['Zerind',374]]
+			if ciudad_inicial == 'Bucarest':#si la ciudad inicial es la misma que la ciudad final, entonces devolvemos 0
+				return 0
+			else
+				for n in lista_hacia_Bucarest:#Buscamos la ciudad inicial en la lista hacia bucarest
+					if ciudad_inicial == n[0]:#Si encuentra la ciudad_inicial en la lista hacia bucarest, entonces devulvemos su respectiva ruta
+						return n[1]
 
 		def marcar_visita(self, ciudad, visitados_aux):
 			index = 0
