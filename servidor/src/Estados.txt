@@ -1,20 +1,20 @@
-Oradea:151-Sibiu,71-Zerind
-Zerind:71-Oradea,75-Arad
-Arad:75-Zerind,140-Sibiu,118-Timisoara
-Timisoara:118-Arad,111-Lugoj
-Lugoj:111-Timisoara,70-Mehadia
-Mehadia:70-Lugoj,75-Dobreta
-Dobreta:75-Mehadia,120-Craiova
-Craiova:120-Dobreta,146-Rimnicu Vilcea,138-Pitesti
-Rimnicu Vilcea:146-Craiova,97-Pitesti,80-Sibiu
-Sibiu:80-Rimnicu Vilcea,99-Fagaras,140-Arad,151-Oradea
-Fagaras:99-Sibiu,211-Bucarest
-Pitesti:138-Craiova,97-Rimnicu Vilcea,101-Bucarest
-Bucarest:211-Fagaras,101-Pitesti,90-Giurgiu,85-Urziceni
-Giurgiu:90-Bucarest
-Urziceni:85-Bucarest,142-Vaslui,98-Hirsova
-Hirsova:98-Urziceni,86-Eforie
-Eforie:86-Hirsova
-Vaslui:142-Urziceni,92-Iasi
-Iasi:92-Vaslui,87-Neamt
-Neamt:87-Iasi
+Oradea:151-Sibiu,71-Zerind:4-1
+Zerind:71-Oradea,75-Arad:2-5
+Arad:75-Zerind,140-Sibiu,118-Timisoara:0-8
+Timisoara:118-Arad,111-Lugoj:1-17
+Lugoj:111-Timisoara,70-Mehadia:7-20
+Mehadia:70-Lugoj,75-Dobreta:8-24
+Dobreta:75-Mehadia,120-Craiova:7-28
+Craiova:120-Dobreta,146-Rimnicu Vilcea,138-Pitesti:14-29
+Rimnicu Vilcea:146-Craiova,97-Pitesti,80-Sibiu:13-17
+Sibiu:80-Rimnicu Vilcea,99-Fagaras,140-Arad,151-Oradea:11-12
+Fagaras:99-Sibiu,211-Bucarest:19-13
+Pitesti:138-Craiova,97-Rimnicu Vilcea,101-Bucarest:20-21
+Bucarest:211-Fagaras,101-Pitesti,90-Giurgiu,85-Urziceni:27-25
+Giurgiu:90-Bucarest:25-30
+Urziceni:85-Bucarest,142-Vaslui,98-Hirsova:32-23
+Hirsova:98-Urziceni,86-Eforie:38-23
+Eforie:86-Hirsova:41-29
+Vaslui:142-Urziceni,92-Iasi:36-13
+Iasi:92-Vaslui,87-Neamt:33-7
+Neamt:87-Iasi:28-4

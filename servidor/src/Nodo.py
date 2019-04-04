@@ -1,10 +1,11 @@
 class Nodo:
-	def __init__(self, nombre_ciudad, lista_hijos):
+	def __init__(self, nombre_ciudad, lista_hijos, coordenadas):
 		self.nombre_ciudad = nombre_ciudad
 		self.lista_hijos = lista_hijos
 		self.ruta_al_nodo = []
 		self.visitas = [0 for x in range(len(lista_hijos)-1)]
 		self.costo_acumulado = 0
+		self.coordenadas = coordenadas
 
 	### Getters ###
 
@@ -24,7 +25,9 @@ class Nodo:
 				idx = idx + 1
 
 		return idx
-
+	
+	def get_coordenadas(self):
+		return self.coordenadas
 	### Setters ###
 
 	def conseguir_costo(self):

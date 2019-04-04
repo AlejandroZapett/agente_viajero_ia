@@ -2,6 +2,7 @@ from Nodo import Nodo
 from Estructuras import Cola
 from Estructuras import Pila
 from Tiempo import tiempo_ejecucion
+from math import sqrt
 import sys
 import copy
 import argparse
@@ -21,6 +22,7 @@ def agente_viajero(argumentos):
 			print(self.ciudades_por_visitar)
 			print(self.tipo_busqueda)
 			print("===============")
+			#print(self.distancia_linea_recta([1,2],[2,2])) ejemplo
 			#Busqueda de la solucion
 			#ruta = self.conseguir_ruta_el_mejor(ciudad_inicial)
 			#self.imprimir_ruta(ruta)
@@ -117,7 +119,7 @@ def agente_viajero(argumentos):
 				return [ciudad.conseguir_nombre_ciudad()]
 
 		def conseguir_ciudades(self): #regresa una lista de nodo, cada nodo es una ciudad
-			ciudades= open('servidor/src/estados.txt', 'r').read().split("\n")
+			ciudades= open('servidor/src/Estados.txt', 'r').read().split("\n")
 			lista_ciudades=[]
 			for ciudad in ciudades:
 				nombre_ciudad= ciudad.split(":")[0]
@@ -128,9 +130,11 @@ def agente_viajero(argumentos):
 
 					hijo = [lista_aux[1],int(lista_aux[0])]
 					lista_dos_hijos.append(hijo)
+				coordenadas = []
+				for x in ciudad.split(":")[2].split("-"):
+				 coordenadas.append(int(x))
 
-
-				lista_ciudades.append(Nodo(nombre_ciudad,lista_dos_hijos))
+				lista_ciudades.append(Nodo(nombre_ciudad,lista_dos_hijos,coordenadas))
 			return lista_ciudades
 
 		def cadena_nodo(self, cadena):
@@ -148,6 +152,14 @@ def agente_viajero(argumentos):
 
 		def pruebas(self):
 			print("=== Pruebas Main ===")
+		
+		def distancia_linea_recta(self,x,y):
+			costo = 27 #cambiar si es necesario
+			a = abs(x[0] - y[0]) * costo
+			b = abs(x[1] - y[1]) * costo
+			return  sqrt(pow(a,2) + pow(b,2))
+
+
 		
 	main = Main()
 
