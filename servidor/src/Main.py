@@ -22,7 +22,7 @@ def agente_viajero(argumentos):
 			print(self.ciudades_por_visitar)
 			print(self.tipo_busqueda)
 			print("===============")
-			#print(self.distancia_linea_recta([1,2],[2,2])) ejemplo
+			#print(self.distancia_linea_recta([1,2],[2,2])) #ejemplo
 			#Busqueda de la solucion
 			#ruta = self.conseguir_ruta_el_mejor(ciudad_inicial)
 			#self.imprimir_ruta(ruta)
@@ -130,10 +130,8 @@ def agente_viajero(argumentos):
 
 					hijo = [lista_aux[1],int(lista_aux[0])]
 					lista_dos_hijos.append(hijo)
-				coordenadas = []
-				for x in ciudad.split(":")[2].split("-"):
-				 coordenadas.append(int(x))
 
+				coordenadas =  [0 for x in ciudad.split(":")[2].split("-")]
 				lista_ciudades.append(Nodo(nombre_ciudad,lista_dos_hijos,coordenadas))
 			return lista_ciudades
 
