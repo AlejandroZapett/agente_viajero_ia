@@ -20,4 +20,4 @@ la interfaz gráfica.
 
 Para ejecutar el progama desde la terminal:
 
- 1. ejecutar: python servidor/src/Main.py "ciudad_inicial:ciudad1 ciudad2"
+ 1. ejecutar: python servidor/src/Main.py "ciudad_inicial:ciudad1,ciudad2"

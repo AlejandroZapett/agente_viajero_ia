@@ -166,7 +166,7 @@ def leer_argumentos():
 
 
 if __name__ == '__main__':
-	#"Oradea:Bucarest Neamt" "Ciudad_inicial:Ciudades_por_visitar"
+	#"Oradea:Bucarest,Neamt" "Ciudad_inicial:Ciudades_por_visitar"
 	# Entrada del usuario
 	argumentos = leer_argumentos()
 	# Instancia del programa
