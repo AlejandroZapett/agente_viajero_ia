@@ -2,6 +2,7 @@ from Nodo import Nodo
 from Estructuras import Cola
 from Estructuras import Pila
 from Tiempo import tiempo_ejecucion
+from math import sqrt
 import sys
 import copy
 import argparse
@@ -15,6 +16,7 @@ def agente_viajero(argumentos):
 			#Condiciones inicales
 			self.ciudades = self.conseguir_ciudades()
 			self.ciudades_por_visitar = ciudades_por_visitar
+			#print(self.distancia_linea_recta([1,2],[2,2])) ejemplo
 			#Busqueda de la solucion
 			ruta = self.conseguir_ruta(ciudad_inicial, tipo)
 			self.imprimir_ruta(ruta)
@@ -87,7 +89,42 @@ def agente_viajero(argumentos):
 			return ciudad_solucion.conseguir_ruta_nodo()
 		
 		def conseguir_ruta_voraz(self, ciudad_incial):
-			pass
+			#Condiciones iniciales
+			visitados = []
+			lista_espera = []
+			ciudad_actual = copy.deepcopy(cadena_nodo(ciudad_inicial))
+			ciudad_actual.establecer_ruta_nodo(
+				ciudad_actual.conseguir_ruta_nodo(),
+				ciudad_actual.conseguir_nombre_ciudad()
+			)
+			######### Busqueda Voraz #########
+			while(self.es_solucion(ciudad_actual)==False):
+				visitados = visitados + self.marcar_visita()
+				hijos = ciudad_actual.conseguir_hijos()
+				for hijo in hijos:
+					nombre_hijo = hijo[0]
+					if nombre_hijo not in visitados:
+						nodo_hijo = copy.deepcopy(cadena_nodo(nombre_hijo))
+						nodo_hijo.establecer_ruta_nodo(
+							ciudad_actual.conseguir_ruta_nodo(),
+							nombre_hijo
+						)
+						menor_distancia = 100000000
+						for ciudad in self.ciudades_por_visitar:
+							nodo_ciudad = copy.deepcopy(cadena_nodo(ciudad))
+							distancia = self.distancia_linea_recta(
+								nodo_hijo.get_coordenadas(),
+								nodo_ciudad.get_coordenadas()
+							) 
+							if distancia < menor_distancia:
+								menor_distancia = distancia
+						nodo_hijo.establecer_costo(menor_distancia)
+						lista_espera.append(nodo_hijo)
+				lista_espera = self.ordenar_lista(lista_espera)
+				ciudad_actual = lista_espera.popleft()
+
+			return ciudad_actual.conseguir_ruta_nodo()
+
 
 		def conseguir_ruta_a_estrella(self, ciudad_inicial):
 			pass
@@ -113,6 +150,11 @@ def agente_viajero(argumentos):
 			nodo_solucion = lista_aux[0]	
 			return nodo_solucion
 
+		def ordenar_lista(self, lista):
+			lista_aux = []
+			lista_aux = sorted(lista_soluciones, key = lambda x: x.costo_acumulado)
+			return lista_aux
+
 		def marcar_visita(self, ciudad):
 			if ciudad.establecer_visita() == 1:
 				return []
@@ -120,7 +162,7 @@ def agente_viajero(argumentos):
 				return [ciudad.conseguir_nombre_ciudad()]
 
 		def conseguir_ciudades(self): #regresa una lista de nodo, cada nodo es una ciudad
-			ciudades= open('servidor/src/estados.txt', 'r').read().split("\n")
+			ciudades= open('servidor/src/Estados.txt', 'r').read().split("\n")
 			lista_ciudades=[]
 			for ciudad in ciudades:
 				nombre_ciudad= ciudad.split(":")[0]
@@ -131,9 +173,11 @@ def agente_viajero(argumentos):
 
 					hijo = [lista_aux[1],int(lista_aux[0])]
 					lista_dos_hijos.append(hijo)
+				coordenadas = []
+				for x in ciudad.split(":")[2].split("-"):
+				 coordenadas.append(int(x))
 
-
-				lista_ciudades.append(Nodo(nombre_ciudad,lista_dos_hijos))
+				lista_ciudades.append(Nodo(nombre_ciudad,lista_dos_hijos,coordenadas))
 			return lista_ciudades
 
 		def cadena_nodo(self, cadena):
@@ -151,6 +195,14 @@ def agente_viajero(argumentos):
 
 		def pruebas(self):
 			print("=== Pruebas Main ===")
+		
+		def distancia_linea_recta(self,x,y):
+			costo = 27 #cambiar si es necesario
+			a = abs(x[0] - y[0]) * costo
+			b = abs(x[1] - y[1]) * costo
+			return  sqrt(pow(a,2) + pow(b,2))
+
+
 		
 	main = Main()
 
