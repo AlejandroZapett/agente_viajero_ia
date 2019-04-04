@@ -15,15 +15,18 @@ def agente_viajero(argumentos):
 			#Condiciones inicales
 			self.ciudades = self.conseguir_ciudades()
 			self.ciudades_por_visitar = ciudades_por_visitar
-			self.tipo_busqueda = tipo
-			print("===============")
-			print(ciudad_inicial)
-			print(self.ciudades_por_visitar)
-			print(self.tipo_busqueda)
-			print("===============")
 			#Busqueda de la solucion
+			ruta = self.conseguir_ruta(ciudad_inicial, tipo)
+			self.imprimir_ruta(ruta)
 			#ruta = self.conseguir_ruta_el_mejor(ciudad_inicial)
-			#self.imprimir_ruta(ruta)
+		
+		def conseguir_ruta(self, ciudad_inicial, tipo):
+			if (tipo == "voraz"):
+				return self.conseguir_ruta_voraz(ciudad_inicial)
+			elif (tipo == "a"):
+				return self.conseguir_ruta_a_estrella(ciudad_inicial)
+			elif (tipo == "amplitud"):
+				return self.conseguir_mejor_solucion(ciudad_inicial)
 
 		def conseguir_ruta_el_mejor(self, ciudad_inicial):
 			#Condiciones inciales
@@ -83,10 +86,10 @@ def agente_viajero(argumentos):
 			ciudad_solucion = self.conseguir_mejor_solucion(lista_soluciones)
 			return ciudad_solucion.conseguir_ruta_nodo()
 		
-		def conseguir_ruta_voraz(self):
+		def conseguir_ruta_voraz(self, ciudad_incial):
 			pass
 
-		def conseguir_ruta_a_estrella(self):
+		def conseguir_ruta_a_estrella(self, ciudad_inicial):
 			pass
 
 		def es_solucion(self, ciudad_actual):#ciudad_actual = nodo
