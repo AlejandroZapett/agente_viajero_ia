@@ -128,7 +128,39 @@ def agente_viajero(argumentos):
 
 
 		def conseguir_ruta_a_estrella(self, ciudad_inicial):
-			pass
+			visitados = []
+			lista_espera = []
+			ciudad_actual = copy.deepcopy(self.cadena_nodo(ciudad_inicial))
+			ciudad_actual.establecer_ruta_nodo(
+				ciudad_actual.conseguir_ruta_nodo(),
+				ciudad_actual.conseguir_nombre_ciudad()
+			)
+			while(self.es_solucion(ciudad_actual)==False):
+				visitados = visitados + self.marcar_visita(ciudad_actual)
+				hijos = ciudad_actual.conseguir_hijos()
+				for hijo in hijos:
+					nombre_hijo = hijo[0] #nombre
+					if nombre_hijo not in visitados:
+						nodo_hijo = copy.deepcopy(self.cadena_nodo(nombre_hijo))
+						nodo_hijo.establecer_ruta_nodo(
+							ciudad_actual.conseguir_ruta_nodo(),
+							nombre_hijo
+						)
+						menor_distancia = 100000000
+						for ciudad in self.ciudades_por_visitar:
+							nodo_ciudad = copy.deepcopy(self.cadena_nodo(ciudad))
+							distancia = self.distancia_linea_recta(
+								nodo_hijo.get_coordenadas(),
+								nodo_ciudad.get_coordenadas()
+							) + hijo[1] #costo
+							if distancia < menor_distancia:
+								menor_distancia = distancia
+						nodo_hijo.establecer_costo(menor_distancia)
+						lista_espera.append(nodo_hijo)
+				lista_espera = self.ordenar_lista(lista_espera)
+				ciudad_actual = lista_espera.pop(0)
+
+			return ciudad_actual.conseguir_ruta_nodo()
 
 		def es_solucion(self, ciudad_actual):#ciudad_actual = nodo
 			#Implementando el metodo
