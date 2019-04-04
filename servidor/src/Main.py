@@ -3,7 +3,7 @@ from Estructuras import Cola
 from Estructuras import Pila
 import sys
 import copy
-
+import argparse
 class Main: 
 
 	def __init__(self, ciudad_inicial, ciudades_por_visitar):
@@ -133,7 +133,17 @@ class Main:
 	def pruebas(self):
 		print("=== Pruebas Main ===")
 
-		
+def leer_argumentos():
+		parser = argparse.ArgumentParser(description='Definir tipo de busqueda y conjunto de ciudades')
+		parser.add_argument('-t','--tipo_busqueda', required=True,help= 'Tipo de busqueda: voraz, amplitud o a')
+		parser.add_argument('-a','--ciudades',required=True,help='Ciudad inicial y ciudades a visitar')
+		args = parser.parse_args()
+		argumentos=[]
+		argumentos.append(args.ciudades.split(":")[0])
+		argumentos.append(args.ciudades.split(":")[1])
+		argumentos.append(args.tipo_busqueda)
+
+		return argumentos		
 
 
 if __name__ == '__main__':
