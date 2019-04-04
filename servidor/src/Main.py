@@ -35,6 +35,7 @@ def agente_viajero(argumentos):
 			#Condiciones inciales
 			lista_soluciones = []
 			visitados = []
+			visitados_aux = []
 			cola = Cola()
 			costo_de_referencia = 1000000
 
@@ -44,7 +45,8 @@ def agente_viajero(argumentos):
 			######### Busqueda el mejor #########
 			# Primera iteracion
 			ciudad_actual.establecer_ruta_nodo(ciudad_actual.conseguir_ruta_nodo(),ciudad_actual.conseguir_nombre_ciudad())
-			visitados = visitados + self.marcar_visita(ciudad_actual)
+			visitados_aux.append(ciudad_actual.conseguir_nombre_ciudad())
+			visitados = visitados + self.marcar_visita(ciudad_actual, visitados_aux)
 			if (self.es_solucion(ciudad_actual) == False): #Si no es solucion
 				hijos = ciudad_actual.conseguir_hijos()
 				for hijo in hijos:
@@ -83,7 +85,8 @@ def agente_viajero(argumentos):
 					costo_de_referencia = ciudad_actual.conseguir_costo()
 					lista_soluciones.append(copy.deepcopy(ciudad_actual))
 					#return ciudad_actual.conseguir_ruta_nodo()
-				visitados = visitados + self.marcar_visita(ciudad_actual)
+				visitados_aux.append(ciudad_actual.conseguir_nombre_ciudad())
+				visitados = visitados + self.marcar_visita(ciudad_actual, visitados_aux)
 				ciudad_actual = cola.pop()
 
 			ciudad_solucion = self.conseguir_mejor_solucion(lista_soluciones)
@@ -92,6 +95,7 @@ def agente_viajero(argumentos):
 		def conseguir_ruta_voraz(self, ciudad_inicial):
 			#Condiciones iniciales
 			visitados = []
+			visitados_aux = []
 			lista_espera = []
 			ciudad_actual = copy.deepcopy(self.cadena_nodo(ciudad_inicial))
 			ciudad_actual.establecer_ruta_nodo(
@@ -100,7 +104,20 @@ def agente_viajero(argumentos):
 			)
 			######### Busqueda Voraz #########
 			while(self.es_solucion(ciudad_actual)==False):
-				visitados = visitados + self.marcar_visita(ciudad_actual)
+				"""
+				print(ciudad_actual.conseguir_nombre_ciudad())
+				print(ciudad_actual.conseguir_ruta_nodo())
+				print(ciudad_actual.conseguir_costo())
+				print(visitados)
+				print("\n")"""
+				visitados_aux.append(ciudad_actual.conseguir_nombre_ciudad())
+				visitados = visitados + self.marcar_visita(ciudad_actual, visitados_aux)
+				nombre_ciudad_sol = ""
+				for ciudad in self.ciudades_por_visitar:
+					nodo_ciudad = copy.deepcopy(self.cadena_nodo(ciudad))
+					if (self.distancia_linea_recta(ciudad_actual.get_coordenadas(), nodo_ciudad.get_coordenadas()) == 0):
+						nombre_ciudad_sol = ciudad
+				self.ciudades_por_visitar = [c for c in self.ciudades_por_visitar if c != nombre_ciudad_sol]
 				hijos = ciudad_actual.conseguir_hijos()
 				for hijo in hijos:
 					nombre_hijo = hijo[0]
@@ -157,8 +174,12 @@ def agente_viajero(argumentos):
 			lista_aux = sorted(lista, key = lambda x: x.costo_acumulado)
 			return list(lista_aux)
 
-		def marcar_visita(self, ciudad):
-			if ciudad.establecer_visita() == 1:
+		def marcar_visita(self, ciudad, visitados_aux):
+			index = 0
+			for x in visitados_aux:
+				if x == ciudad.conseguir_nombre_ciudad():
+					index = index + 1
+			if index < ciudad.conseguir_num_visitas():
 				return []
 			else:
 				return [ciudad.conseguir_nombre_ciudad()]

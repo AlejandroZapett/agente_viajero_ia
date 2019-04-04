@@ -18,6 +18,9 @@ class Nodo:
 	def conseguir_ruta_nodo(self):
 		return self.ruta_al_nodo
 
+	def conseguir_num_visitas(self):
+		return len(self.visitas)
+
 	def conseguir_visitas(self):
 		idx = 0
 		for x in self.visitas:
