@@ -131,7 +131,7 @@ def agente_viajero(argumentos):
 					hijo = [lista_aux[1],int(lista_aux[0])]
 					lista_dos_hijos.append(hijo)
 
-				coordenadas =  [0 for x in ciudad.split(":")[2].split("-")]
+				coordenadas =  [int(x) for x in ciudad.split(":")[2].split("-")]
 				lista_ciudades.append(Nodo(nombre_ciudad,lista_dos_hijos,coordenadas))
 			return lista_ciudades
 
