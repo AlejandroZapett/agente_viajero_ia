@@ -37,7 +37,7 @@ function pythonScript(arg){
 	};
 
 
-	var pythonCode = new PythonShell('main.py', options);
+	var pythonCode = new PythonShell('Main.py', options);
 	pythonCode.on('message', function (message){
 		console.log(message);
 		io.emit('response', message);

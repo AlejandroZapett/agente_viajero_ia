@@ -34,17 +34,18 @@ class Main:
 				nombre_hijo = hijo[0]
 				if nombre_hijo not in visitados:
 					# Establecemos la ciudad hija como nodo
-					nodo_hijo = self.cadena_nodo(nombre_hijo)
+					nodo_hijo = copy.deepcopy(self.cadena_nodo(nombre_hijo))
 					# Establecemos un costo y una ruta
 					nodo_hijo.establecer_ruta_nodo(ciudad_actual.conseguir_ruta_nodo(), nodo_hijo.conseguir_nombre_ciudad())
-					nodo_hijo.establecer_costo(hijo[1]+ciudad_actual.conseguir_costo())
+					nodo_hijo.establecer_costo(hijo[1])
 					# Ingresamos la ciudad hija en la cola
 					if nodo_hijo.conseguir_costo() < costo_de_referencia:
 						cola.push(nodo_hijo)
 		else:
 			costo_de_referencia = ciudad_actual.conseguir_costo()
 			lista_soluciones.append(copy.deepcopy(ciudad_actual))
-			return ciudad_actual.conseguir_ruta_nodo()
+			#return ciudad_actual.conseguir_ruta_nodo()
+	
 		ciudad_actual = cola.pop()
 		# Iteraciones
 		while (cola.esVacio() == False): # Mientras la cola tenga ciudades por visitar
@@ -64,6 +65,7 @@ class Main:
 			else:
 				costo_de_referencia = ciudad_actual.conseguir_costo()
 				lista_soluciones.append(copy.deepcopy(ciudad_actual))
+				#return ciudad_actual.conseguir_ruta_nodo()
 			visitados = visitados + self.marcar_visita(ciudad_actual)
 			ciudad_actual = cola.pop()
 
